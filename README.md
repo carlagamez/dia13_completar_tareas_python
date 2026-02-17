@@ -29,3 +29,31 @@ El programa permite ahora:
 
 Las tareas completadas se muestran con el símbolo:
 
+
+---
+
+## 🛠️ Tecnologías
+
+- Python
+- Google Colab
+- Archivos .txt
+
+---
+
+## 🎯 Objetivo del proyecto
+
+Aprender a modificar datos persistentes y simular el comportamiento de aplicaciones reales de gestión de tareas.
+
+---
+
+## ✨ Estado
+
+En progreso 🚀  
+Día 13/100 completado.
+
+---
+
+## 🧠 Reflexión personal
+
+Hoy he aprendido a modificar datos existentes en un archivo.
+Esto me acerca más a crear aplicaciones funcionales y dinámicas.
