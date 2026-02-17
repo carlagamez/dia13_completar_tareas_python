@@ -1,0 +1,225 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Día 13 — Marcar tareas como completadas\n",
+        "\n",
+        "Hoy voy a mejorar el gestor de tareas permitiendo marcar tareas como completadas.\n",
+        "\n",
+        "Conceptos usados:\n",
+        "- funciones\n",
+        "- archivos\n",
+        "- listas\n",
+        "- modificación de datos\n",
+        "\n",
+        "Día: 13/100\n"
+      ],
+      "metadata": {
+        "id": "BUvIdXYM0mvf"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def mostrar_tareas():\n",
+        "    try:\n",
+        "        with open(\"tareas.txt\", \"r\") as archivo:\n",
+        "            lineas = archivo.readlines()\n",
+        "\n",
+        "            if len(lineas) == 0:\n",
+        "                print(\"No hay tareas.\")\n",
+        "            else:\n",
+        "                print(\"\\n📋 Lista de tareas:\")\n",
+        "                for i, linea in enumerate(lineas, start=1):\n",
+        "                    print(i, \"-\", linea.strip())\n",
+        "\n",
+        "    except FileNotFoundError:\n",
+        "        print(\"No hay archivo de tareas.\")"
+      ],
+      "metadata": {
+        "id": "YZgM9XXb1X6Y"
+      },
+      "execution_count": 3,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def completar_tarea():\n",
+        "    try:\n",
+        "        with open(\"tareas.txt\", \"r\") as archivo:\n",
+        "            tareas = archivo.readlines()\n",
+        "\n",
+        "        mostrar_tareas()\n",
+        "\n",
+        "        numero = int(input(\"Número de tarea a completar: \"))\n",
+        "\n",
+        "        if 1 <= numero <= len(tareas):\n",
+        "            tareas[numero - 1] = tareas[numero - 1].strip() + \" ✅\\n\"\n",
+        "\n",
+        "            with open(\"tareas.txt\", \"w\") as archivo:\n",
+        "                archivo.writelines(tareas)\n",
+        "\n",
+        "            print(\"✅ Tarea marcada como completada\")\n",
+        "\n",
+        "        else:\n",
+        "            print(\"Número inválido\")\n",
+        "\n",
+        "    except FileNotFoundError:\n",
+        "        print(\"No hay tareas\")"
+      ],
+      "metadata": {
+        "id": "hyLelH911flE"
+      },
+      "execution_count": 4,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def guardar_tarea():\n",
+        "    tarea = input(\"Nueva tarea: \")\n",
+        "\n",
+        "    with open(\"tareas.txt\", \"a\") as archivo:\n",
+        "        archivo.write(tarea + \"\\n\")\n",
+        "\n",
+        "    print(\"Tarea guardada\")"
+      ],
+      "metadata": {
+        "id": "9C_CKsF21hfE"
+      },
+      "execution_count": 6,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def mostrar_menu():\n",
+        "    print(\"\\n--- GESTOR DE TAREAS ---\")\n",
+        "    print(\"1. Añadir tarea\")\n",
+        "    print(\"2. Mostrar tareas\")\n",
+        "    print(\"3. Completar tarea\")\n",
+        "    print(\"4. Salir\")"
+      ],
+      "metadata": {
+        "id": "z1G8ey9_1lRM"
+      },
+      "execution_count": 7,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def main():\n",
+        "    opcion = \"\"\n",
+        "\n",
+        "    while opcion != \"4\":\n",
+        "        mostrar_menu()\n",
+        "        opcion = input(\"Opción: \")\n",
+        "\n",
+        "        if opcion == \"1\":\n",
+        "            guardar_tarea()\n",
+        "        elif opcion == \"2\":\n",
+        "            mostrar_tareas()\n",
+        "        elif opcion == \"3\":\n",
+        "            completar_tarea()\n",
+        "        elif opcion == \"4\":\n",
+        "            print(\"Hasta luego\")\n",
+        "        else:\n",
+        "            print(\"Opción inválida\")\n"
+      ],
+      "metadata": {
+        "id": "-6RVgJ121mtF"
+      },
+      "execution_count": 8,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "main()"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "7PTwP4gK1oNs",
+        "outputId": "31f2949e-f8c5-4067-c1ce-221b72e86c82"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "--- GESTOR DE TAREAS ---\n",
+            "1. Añadir tarea\n",
+            "2. Mostrar tareas\n",
+            "3. Completar tarea\n",
+            "4. Salir\n",
+            "Opción: 1\n",
+            "Nueva tarea: Lección de python\n",
+            "Tarea guardada\n",
+            "\n",
+            "--- GESTOR DE TAREAS ---\n",
+            "1. Añadir tarea\n",
+            "2. Mostrar tareas\n",
+            "3. Completar tarea\n",
+            "4. Salir\n",
+            "Opción: 2\n",
+            "\n",
+            "📋 Lista de tareas:\n",
+            "1 - Lección de python\n",
+            "\n",
+            "--- GESTOR DE TAREAS ---\n",
+            "1. Añadir tarea\n",
+            "2. Mostrar tareas\n",
+            "3. Completar tarea\n",
+            "4. Salir\n",
+            "Opción: 3\n",
+            "\n",
+            "📋 Lista de tareas:\n",
+            "1 - Lección de python\n",
+            "Número de tarea a completar: 1\n",
+            "✅ Tarea marcada como completada\n",
+            "\n",
+            "--- GESTOR DE TAREAS ---\n",
+            "1. Añadir tarea\n",
+            "2. Mostrar tareas\n",
+            "3. Completar tarea\n",
+            "4. Salir\n",
+            "Opción: 4\n",
+            "Hasta luego\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n"
+      ],
+      "metadata": {
+        "id": "dD1cK3C41pnR"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
